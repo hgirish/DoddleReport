@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using ClosedXML.Excel;
 
 namespace DoddleReport.OpenXml
@@ -54,7 +55,7 @@ namespace DoddleReport.OpenXml
         /// </summary>
         /// <param name="report">The report.</param>
         /// <param name="destination">The destination.</param>
-        public void WriteReport(Report report, Stream destination)
+        public async Task WriteReportAsync(Report report, Stream destination)
         {
             var workbook = new XLWorkbook();
             WriteReport(report, workbook);
@@ -63,7 +64,7 @@ namespace DoddleReport.OpenXml
             {
                 workbook.SaveAs(ms);
                 ms.Position = 0;
-                ms.CopyTo(destination);
+                await ms.CopyToAsync(destination);
             }
         }
 
@@ -177,12 +178,12 @@ namespace DoddleReport.OpenXml
                     field.DataStyle.CopyToXlStyle(cell.Style);
                     if (field.DataType == typeof(bool))
                     {
-                        cell.SetDataType(XLCellValues.Boolean);
+                        cell.SetDataType(XLDataType.Boolean);
                         cell.Value = reportRow[field];
                     }
-                    else if (field.DataType.GetTypeInfo().IsNumber())
+                    else if (IsNumber(field.DataType))
                     {
-                        cell.SetDataType(XLCellValues.Number);
+                        cell.SetDataType(XLDataType.Number);
                         if (!string.Equals("{0}", field.DataFormatString))
                         {
                             cell.Style.NumberFormat.Format = GetOpenXmlDataFormatString(field.DataFormatString);
@@ -195,7 +196,7 @@ namespace DoddleReport.OpenXml
                     }
                     else if (field.DataType == typeof(DateTime) || field.DataType == typeof(DateTime?))
                     {
-                        cell.SetDataType(XLCellValues.DateTime);
+                        cell.SetDataType(XLDataType.DateTime);
                         cell.Value = reportRow.GetFormattedValue(field);
                     }
                     else
@@ -214,7 +215,7 @@ namespace DoddleReport.OpenXml
                     if (field.ShowTotals)
                     {
                         var cell = dataRow.Cell(colCount);
-                        cell.SetDataType(XLCellValues.Number);
+                        cell.SetDataType(XLDataType.Number);
                         cell.FormulaA1 = string.Format(CultureInfo.InvariantCulture, "=SUM({0}{1}:{0}{2})", cell.Address.ColumnLetter, 2, rowCount - 1);
                         if (!string.Equals("{0}", field.DataFormatString))
                         {
@@ -364,7 +365,14 @@ namespace DoddleReport.OpenXml
                     }
                     else if (adjustToContents)
                     {
-                        column.AdjustToContents(1, 50, 5.0, 100.0);
+                        try
+                        {
+                            column.AdjustToContents(1, 50, 5.0, 100.0);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                     }
                     else
                     {
@@ -373,7 +381,14 @@ namespace DoddleReport.OpenXml
                 }
             }
 
-            worksheet.Columns().AdjustToContents();
+            try
+            {
+                worksheet.Columns().AdjustToContents();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
             // Check if the current writer needs to append another report to the report we just generated
             if (ReportsToAppend.ContainsKey(report))
@@ -383,6 +398,26 @@ namespace DoddleReport.OpenXml
                     WriteReport(reportToAppend, workbook);
                 }
             }
+        }
+
+        public static bool IsNumber( Type type)
+        {
+            return type == typeof(sbyte)
+                    || type == typeof(byte)
+                    || type == typeof(short)
+                    || type == typeof(ushort)
+                    || type == typeof(int)
+                    || type == typeof(uint)
+                    || type == typeof(long)
+                    || type == typeof(ulong)
+                    || type == typeof(float)
+                    || type == typeof(double)
+                    || type == typeof(decimal);
+        }
+
+        public void WriteReport(Report report, Stream destination)
+        {
+            WriteReportAsync(report, destination).RunSynchronously();
         }
     }
 }

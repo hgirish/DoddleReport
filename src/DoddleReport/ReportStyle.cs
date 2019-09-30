@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Linq;
 using DoddleReport.Configuration;
 
 namespace DoddleReport
@@ -7,6 +8,10 @@ namespace DoddleReport
     {
         public void ApplyStyle(StyleElement configElement)
         {
+            if (configElement == null)
+            {
+                return;
+            }
             Bold = configElement.Bold;
             Underline = configElement.Underline;
             Italic = configElement.Italic;
@@ -35,7 +40,10 @@ namespace DoddleReport
 
         public ReportStyle(string styleName)
         {
-            ApplyStyle(Config.Report.Styles[styleName]);
+            var style = Config.Report.Styles.FirstOrDefault(x => x.Name == styleName);
+            ApplyStyle(
+               style
+                );
         }
 
         public static ReportStyle DataRowStyle
@@ -59,15 +67,19 @@ namespace DoddleReport
             switch (rowType)
             {
                 case ReportRowType.DataRow:
-                    ApplyStyle(Config.Report.Styles[Config.Report.DataRowStyleName]);
+                    ApplyStyle(Config.Report.Styles.FirstOrDefault( x=> x.Name ==
+                    Config.Report.DataRowStyleName));
                     break;
 
                 case ReportRowType.FooterRow:
-                    ApplyStyle(Config.Report.Styles[Config.Report.FooterRowStyleName]);
+                    ApplyStyle(
+                        Config.Report.Styles.FirstOrDefault(x => x.Name ==
+                       Config.Report.FooterRowStyleName));
                     break;
 
                 case ReportRowType.HeaderRow:
-                    ApplyStyle(Config.Report.Styles[Config.Report.HeaderRowStyleName]);
+                    ApplyStyle(Config.Report.Styles.FirstOrDefault(x => x.Name ==
+                    Config.Report.HeaderRowStyleName));
                     break;
             }
         }

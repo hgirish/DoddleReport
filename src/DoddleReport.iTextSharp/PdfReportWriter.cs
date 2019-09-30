@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Font = iTextSharp.text.Font;
@@ -22,7 +23,7 @@ namespace DoddleReport.iTextSharp
         /// </summary>
         /// <param name="report">The report.</param>
         /// <param name="destination">The destination.</param>
-        public void WriteReport(Report report, Stream destination)
+        public void WriteReportAsync(Report report, Stream destination)
         {
             var pageSize = new Rectangle(report.RenderHints.PageSize.Width, report.RenderHints.PageSize.Height);
             if (report.RenderHints.Orientation == ReportOrientation.Landscape)
@@ -311,6 +312,16 @@ namespace DoddleReport.iTextSharp
 
             if(reportStyle.TextRotation % 90 == 0)
                 cell.Rotation = reportStyle.TextRotation;
+        }
+
+        public void WriteReport(Report report, Stream destination)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IReportWriter.WriteReportAsync(Report report, Stream destination)
+        {
+            throw new NotImplementedException();
         }
     }
 }

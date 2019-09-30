@@ -1,8 +1,9 @@
 using System.Configuration;
 
 namespace DoddleReport.Configuration
-{
-    public sealed class DoddleReportSection : ConfigurationSection
+{ 
+    /*
+    public sealed class OldDoddleReportSection : ConfigurationSection
     {
         [ConfigurationProperty("writers", IsRequired = true)]
         public WriterElementCollection Writers
@@ -18,7 +19,7 @@ namespace DoddleReport.Configuration
             set { this["styles"] = value; }
         }
 
-        [ConfigurationProperty("defaultWriter", DefaultValue = "Html")]
+        [ConfigurationProperty("defaultWriter", DefaultValue = "OpenXml")]
         public string DefaultWriter
         {
             get { return (string)base["defaultWriter"]; }
@@ -46,4 +47,5 @@ namespace DoddleReport.Configuration
             set { this["footerRowStyle"] = value; }
         }
     }
+    */
 }

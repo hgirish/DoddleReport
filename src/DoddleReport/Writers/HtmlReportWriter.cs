@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DoddleReport.Writers
 {
@@ -247,7 +248,7 @@ namespace DoddleReport.Writers
         }
 
 
-        public virtual void WriteReport(Report report, Stream destination)
+        public virtual void WriteReportAsync(Report report, Stream destination)
         {
             BuildReportHtml(report.TextFields, report.RenderHints, report.GetRows());
 
@@ -259,6 +260,16 @@ namespace DoddleReport.Writers
         public virtual void AppendReport(Report source, Report destination)
         {
 
+        }
+
+        public void WriteReport(Report report, Stream destination)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IReportWriter.WriteReportAsync(Report report, Stream destination)
+        {
+            throw new NotImplementedException();
         }
     }
 }

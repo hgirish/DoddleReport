@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace DoddleReport.Writers
 {
@@ -25,7 +26,7 @@ namespace DoddleReport.Writers
         public static Func<RowField, string> GetHeaderText = field => field.HeaderText.Replace(" ", "").ToUpper();
 
 
-        public void WriteReport(Report report, Stream destination)
+        public void WriteReportAsync(Report report, Stream destination)
         {
             bool includeHeader = report.RenderHints[IncludeHeaderHint] as bool? ?? true;
             string delimiter = report.RenderHints[DelimiterHint] as string ?? DefaultDelimiter;
@@ -76,6 +77,16 @@ namespace DoddleReport.Writers
         public void AppendReport(Report source, Report destination)
         {
 
+        }
+
+        public void WriteReport(Report report, Stream destination)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IReportWriter.WriteReportAsync(Report report, Stream destination)
+        {
+            throw new NotImplementedException();
         }
     }
 }

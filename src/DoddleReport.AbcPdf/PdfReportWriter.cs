@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.IO;
-using WebSupergoo.ABCpdf10;
 
 namespace DoddleReport.AbcPdf
 {

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{0E73989A-FF31-4542-88F9-DAC6F9C40FE2}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,13 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C705E27D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoddleReport", "DoddleReport\DoddleReport.csproj", "{05A5C02F-D751-4A21-80BB-0FDE1188E48B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoddleReport.AbcPdf", "DoddleReport.AbcPdf\DoddleReport.AbcPdf.csproj", "{346A873D-3F0A-4A71-840A-24B1095C6021}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoddleReport.iTextSharp", "DoddleReport.iTextSharp\DoddleReport.iTextSharp.csproj", "{A88842E1-113B-4C3F-AF81-B68084118D91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoddleReport.iTextSharp", "DoddleReport.iTextSharp\DoddleReport.iTextSharp.csproj", "{A88842E1-113B-4C3F-AF81-B68084118D91}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoddleReport.OpenXml", "DoddleReport.OpenXml\DoddleReport.OpenXml.csproj", "{B4D4693D-70CC-41DF-9116-8E8EA5DE1D90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoddleReport.Sample.AspnetCore", "DoddleReport.Sample.AspnetCore\DoddleReport.Sample.AspnetCore.csproj", "{785F35DF-B9A3-402B-9F18-7707384B0641}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoddleReport.Sample.AspnetCore", "DoddleReport.Sample.AspnetCore\DoddleReport.Sample.AspnetCore.csproj", "{785F35DF-B9A3-402B-9F18-7707384B0641}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,18 +43,6 @@ Global
 		{05A5C02F-D751-4A21-80BB-0FDE1188E48B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{05A5C02F-D751-4A21-80BB-0FDE1188E48B}.Release|x86.ActiveCfg = Release|Any CPU
 		{05A5C02F-D751-4A21-80BB-0FDE1188E48B}.Release|x86.Build.0 = Release|Any CPU
-		{346A873D-3F0A-4A71-840A-24B1095C6021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{346A873D-3F0A-4A71-840A-24B1095C6021}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{346A873D-3F0A-4A71-840A-24B1095C6021}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{346A873D-3F0A-4A71-840A-24B1095C6021}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{346A873D-3F0A-4A71-840A-24B1095C6021}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{346A873D-3F0A-4A71-840A-24B1095C6021}.Debug|x86.Build.0 = Debug|Any CPU
-		{346A873D-3F0A-4A71-840A-24B1095C6021}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{346A873D-3F0A-4A71-840A-24B1095C6021}.Release|Any CPU.Build.0 = Release|Any CPU
-		{346A873D-3F0A-4A71-840A-24B1095C6021}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{346A873D-3F0A-4A71-840A-24B1095C6021}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{346A873D-3F0A-4A71-840A-24B1095C6021}.Release|x86.ActiveCfg = Release|Any CPU
-		{346A873D-3F0A-4A71-840A-24B1095C6021}.Release|x86.Build.0 = Release|Any CPU
 		{A88842E1-113B-4C3F-AF81-B68084118D91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A88842E1-113B-4C3F-AF81-B68084118D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A88842E1-113B-4C3F-AF81-B68084118D91}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

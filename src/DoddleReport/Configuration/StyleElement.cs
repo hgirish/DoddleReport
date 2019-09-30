@@ -1,9 +1,43 @@
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Drawing;
 
 namespace DoddleReport.Configuration
 {
-    public sealed class StyleElement : ConfigurationElement
+    public class StyleElement
+    {
+        [Required]
+        public string Name { get; set; }
+        public bool Bold { get; set; } = false;
+        public bool Underline { get; set; } = false;
+        public bool Italic { get; set; } = false;
+        public int FontSize { get; set; } = 9;
+        [Range(-99,99)]
+        public int TextRotation { get; set; } = 0;
+        public string BackColorString { get; set; } = "White";
+        public string ForeColorString { get; set; } = "Black";
+
+        public Color BackColor { get; set; }
+        
+        public Color ForeColor { get; set; }
+       
+
+        internal void ApplyStyle(ReportStyle reportStyle)
+        {
+            reportStyle.Bold = Bold;
+            reportStyle.Underline = Underline;
+            reportStyle.Italic = Italic;
+
+            reportStyle.BackColor = BackColor;
+            reportStyle.ForeColor = ForeColor;
+
+            reportStyle.FontSize = FontSize;
+            reportStyle.TextRotation = TextRotation;
+        }
+
+    }
+    /*
+    public sealed class OldStyleElement : ConfigurationElement
     {
         [ConfigurationProperty("name", IsRequired = true)]
         public string Name
@@ -101,6 +135,6 @@ namespace DoddleReport.Configuration
             reportStyle.TextRotation = TextRotation;
         }
     }
-
+    */
 
 }

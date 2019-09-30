@@ -1,9 +1,45 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 
 namespace DoddleReport.Configuration
 {
-    public class WriterElement : ConfigurationElement
+    public class WriterElement
+    {
+        [Required]
+        public string Format { get; set; }
+        [Required]
+        public string TypeName { get; set; }
+        public string ContentType { get; set; } = "text/html";
+        public bool OfferDownload { get; set; } = false;
+        [Required]
+        public string FileExtension { get; set; }
+
+        public Type Type
+        {
+            get
+            {
+                return Type.GetType(TypeName);
+            }
+
+        }
+        public IReportWriter LoadWriter()
+        {
+            try
+            {
+                var writer = Activator.CreateInstance(Type) as IReportWriter;
+                return writer;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(string.Format("Unable to load the ReportWriter format '{0}' because the type '{1}' could not be created", Format, TypeName), ex);
+            }
+        }
+
+    }
+
+    /*
+    public class OldWriterElement : ConfigurationElement
     {
         [ConfigurationProperty("format", IsRequired = true)]
         public string Format
@@ -68,4 +104,5 @@ namespace DoddleReport.Configuration
             }
         }
     }
+    */
 }

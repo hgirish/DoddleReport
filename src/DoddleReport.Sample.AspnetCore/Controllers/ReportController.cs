@@ -1,15 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading.Tasks;
+using DoddleReport.Configuration;
 using DoddleReport.Sample.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace DoddleReport.Sample.AspnetCore.Controllers
 {
     public class ReportController : Controller
     {
+        private readonly DoddleReportConfiguration config;
+        public ReportController(IOptions<DoddleReportConfiguration> options)
+        {
+            config = options.Value;
+        }
         public IActionResult Index()
         {
             // Get the data for the report (any IEnumerable will work)
@@ -62,7 +67,7 @@ namespace DoddleReport.Sample.AspnetCore.Controllers
             report.RenderingRow += report_RenderingRow;
 
 
-            return new ReportResult(report);
+            return new ReportResult(report, config);
         }
 
         void report_RenderingRow(object sender, ReportRowEventArgs e)

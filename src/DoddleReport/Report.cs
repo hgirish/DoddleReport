@@ -139,7 +139,7 @@ namespace DoddleReport
 
             //AddTotalsIfRowSupports(dataRow, row);
 
-            Writer.WriteReport(this, destination);
+            Writer.WriteReportAsync(this, destination);
         }
 
         /// <summary>

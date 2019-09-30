@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ABCpdf" Version="10.1.2.6" />
+    <PackageReference Include="ABCpdf" Version="11.3.3" />
   </ItemGroup>
 
   <ItemGroup>
